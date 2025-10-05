@@ -67,5 +67,5 @@ if answer:
 
     if st.button("次の単語へ"):
         st.session_state.current_word = random.choice(list(words.keys()))
-        st.session_state.answer = ""  # ← ★ 入力をクリア
+        st.session_state.update({"answer": ""})
         st.rerun()
