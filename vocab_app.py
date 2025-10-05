@@ -32,7 +32,7 @@ check_password()  # ← パスワード認証が通るまでここで止まる
 
 st.title("📘 英単語暗記アプリ")
 
-# 単語リスト（例：自分で増やせます）
+# 単語リスト
 words = {
     "apple": "りんご",
     "book": "本",
@@ -49,15 +49,14 @@ words = {
 # ランダムに1単語選択
 if "current_word" not in st.session_state:
     st.session_state.current_word = random.choice(list(words.keys()))
-if "answer" not in st.session_state:
-    st.session_state.answer = ""
-    
+
 st.subheader("次の英単語の意味は？")
 st.markdown(f"### **{st.session_state.current_word}**")
 
-# 回答欄
-answer = st.text_input("日本語の意味を入力してください",key="answer")
+# --- 入力欄（★単語ごとにkeyを変える）
+answer = st.text_input("日本語の意味を入力してください", key=f"answer_{st.session_state.current_word}")
 
+# --- 判定 ---
 if answer:
     correct = words[st.session_state.current_word]
     if answer.strip() == correct:
@@ -65,7 +64,7 @@ if answer:
     else:
         st.error(f"❌ 不正解。正解は「{correct}」です。")
 
+    # --- 次の単語へ ---
     if st.button("次の単語へ"):
         st.session_state.current_word = random.choice(list(words.keys()))
-        st.session_state.update({"answer": ""})
         st.rerun()
