@@ -49,7 +49,9 @@ words = {
 # ランダムに1単語選択
 if "current_word" not in st.session_state:
     st.session_state.current_word = random.choice(list(words.keys()))
-
+if "answer" not in st.session_state:
+    st.session_state.answer = ""
+    
 st.subheader("次の英単語の意味は？")
 st.markdown(f"### **{st.session_state.current_word}**")
 
