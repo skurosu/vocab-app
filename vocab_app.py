@@ -66,3 +66,7 @@ if answer:
     if st.button("次の単語へ"):
         st.session_state.current_word = random.choice(list(words.keys()))
         st.rerun()
+
+else:
+    # ボタンが押されたときの入力欄初期化
+    st.session_state.answer = ""
